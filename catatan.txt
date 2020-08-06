@@ -1,0 +1,57 @@
+minus:
+
+1.PHONE CALL SCREEN
+2.Chatroom screen (await contact list or chats existing)
+3.Profile Settings screen (await profile content)
+4.User Detail screen (await contact list)
+
+-------------------------------------------------------------------------------------------
+
+Total Screen:
+1. Home
+    a. Chat
+    b. Contact
+    c. Phone Call
+2. Search User
+3. User Detail
+4. Profile display
+5. Signin ##DONE##
+6. Signup ##DONE##
+7. Chatroom
+8. Profile Settings
+9. Map Detail
+
+GROUPING SIMILAR COMPONENT:
+A.
+    1. chats ####HANDLED
+    2. contact/friend list ####HANDLED
+    3. search user ####HANDLED
+B.
+    1. user detail ####HANDLED
+    2. profile display ####HANDLED
+C.
+    1. sign in ####HANDLED
+    2. sign up ####HANDLED
+D.
+    1. Chatroom ###HANDLED
+E.
+    1. Profile Settings ###HANDLED
+F.
+    1. Phone Screen
+
+Screen Done and Connected to API:
+1. Signin
+2. Signup
+
+
+
+TODO:
+1. pindahin getLocation ke Contacts, kirim ke Userdetail dan MapDetail
+2. Buat search user
+3. add user
+4. notification
+5. loading
+6. form validation
+7. location on profile
+8. edit profile
+9. 
