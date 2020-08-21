@@ -72,12 +72,17 @@ Before you begin, ensure you have met the following requirements:
 - Open terminal (use git bash for windows).
 - Follow these command :
 
- - `git clone https://github.com/knocknockguesswho/Terrace`
- - `cd Terrace`
- - `npm install`
- - `cd android`
- - `./gradlew clean`
- - `cd ..`
+ `git clone https://github.com/knocknockguesswho/Terrace`
+ 
+ `cd Terrace`
+ 
+ `npm install`
+ 
+ `cd android`
+ 
+ `./gradlew clean`
+ 
+ `cd ..`
   
 - run react-native to your device.
 
