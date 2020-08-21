@@ -17,7 +17,7 @@ Terrace is Chat App built with React Native and has a concept for users that aut
 
 ## Features
 
-### Authentication
+#### Authentication
 
 Users need to be registered if they want to start chatting with someone by simply input their Fullname, Username, Password and Email on the Signup fields.
 
