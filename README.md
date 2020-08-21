@@ -45,13 +45,13 @@ User can see all of their friends info, such as Email, Fullname, Avatar and Loca
 
 ## Screenshots
 
-![](https://i.imgur.com/QDRmXNi.png)
+![](https://i.imgur.com/XWATcBm.png)
 
-![](https://i.imgur.com/twu5sN4.png)
+![](https://i.imgur.com/IjUBHYk.png)
 
-![](https://i.imgur.com/0hUYm11.png)
+![](https://i.imgur.com/tijLo3I.png)
 
-![](https://i.imgur.com/iDZML1t.png)
+![](https://i.imgur.com/ebPfMr5.png)
 
 
 ## Usage
