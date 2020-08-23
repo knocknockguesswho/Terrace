@@ -87,7 +87,7 @@ const Header = (props) =>{
           <View style={styles.avatar}>
             <Image 
               style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
-              source={{uri: `http://192.168.1.9:3000/uploads/${props.Auth.data.avatar}`}}
+              source={{uri: `http://192.168.100.11:3000/uploads/${props.Auth.data.avatar}`}}
              />
           </View>
           <View style={styles.profileDetail}>
@@ -117,7 +117,7 @@ const Header = (props) =>{
       <>
         <View style={{ width: '60%', height: '100%', justifyContent: 'space-between', flexDirection: 'row'}}>
           <View style={{height: '100%', justifyContent: 'center'}}>
-            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack}>
+            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack} style={styles.backButton}>
               <BackLogo width={12} height={12} />
             </TouchableOpacity>
           </View>
@@ -134,7 +134,7 @@ const Header = (props) =>{
       <>
         <View style={{ width: '75%', height: '100%', justifyContent: 'space-between', flexDirection: 'row'}}>
           <View style={{height: '100%', justifyContent: 'center'}}>
-            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack}>
+            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack} style={styles.backButton}>
               <BackLogo width={12} height={12} />
             </TouchableOpacity>
           </View>
@@ -151,7 +151,7 @@ const Header = (props) =>{
       <>
         <View style={{ width: '60%', height: '100%', justifyContent: 'space-between', flexDirection: 'row'}}>
           <View style={{height: '100%', justifyContent: 'center'}}>
-            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack}>
+            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack} style={styles.backButton}>
               <BackLogo width={12} height={12} />
             </TouchableOpacity>
           </View>
@@ -168,7 +168,7 @@ const Header = (props) =>{
       <>
         <View style={{ width: '120%', height: '100%', justifyContent: 'space-between', flexDirection: 'row'}}>
           <View style={{height: '100%', justifyContent: 'center'}}>
-            <TouchableOpacity activeOpacity={.5} onPress={()=>props.navigation.push('Home')}>
+            <TouchableOpacity activeOpacity={.5} onPress={()=>props.navigation.push('Home')} style={styles.backButton}>
               <BackLogo width={12} height={12} />
             </TouchableOpacity>
           </View>
@@ -177,7 +177,7 @@ const Header = (props) =>{
               <View style={styles.avatar}>
                 <Image 
                   style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
-                  source={{uri: `http://192.168.1.9:3000/uploads/${props.data.avatar}`}}
+                  source={{uri: `http://192.168.100.11:3000/uploads/${props.data.avatar}`}}
                 />
               </View>
               <View style={styles.profileDetail}>
@@ -201,7 +201,7 @@ const Header = (props) =>{
       <>
         <View style={{ width: '100%', height: '100%', justifyContent: 'space-between', flexDirection: 'row'}}>
           <View style={{height: '100%', justifyContent: 'center'}}>
-            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack}>
+            <TouchableOpacity activeOpacity={.5} onPress={handleGoBack} style={styles.backButton}>
               <BackLogo width={12} height={12} />
             </TouchableOpacity>
           </View>
@@ -356,6 +356,12 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 5,
     paddingLeft: 5
+  },
+  backButton: {
+    height: 20, 
+    width:20, 
+    alignItems: 'center', 
+    justifyContent: 'center'
   }
 })
 

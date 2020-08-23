@@ -53,7 +53,7 @@ class Chats extends Component{
   }
 
   async componentDidMount(){
-    this.socket = io('http://192.168.1.9:3000');
+    this.socket = io('http://192.168.100.11:3000');
     await this.socket.on('last-message', msg=>{
       const test = this.state.latest_conversations;
       const objInd=test.findIndex(data=>data.id===msg.id)
@@ -110,7 +110,7 @@ class Chats extends Component{
                       <TouchableOpacity key={index} activeOpacity={.5} onPress={()=>this.props.navigation.push('Chatroom', { friendsID: message.id_ur!==user_id? message.id_ur : message.id_us, avatar: message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar, friendsName: message.id_ur!==user_id? message.receiver_fullname : message.sender_fullname })} style={styles.chatContainer}>
                         <View style={styles.friendsAvatar}>
                           <Image
-                            source={{uri: `http://192.168.1.9:3000/uploads/${message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar}`}}
+                            source={{uri: `http://192.168.100.11:3000/uploads/${message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar}`}}
                             style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
                           />
                         </View>

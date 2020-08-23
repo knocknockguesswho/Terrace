@@ -61,7 +61,7 @@ class Chatroom extends Component{
   
   
   componentDidMount(){
-    this.socket = io('http://192.168.1.9:3000');
+    this.socket = io('http://192.168.100.11:3000');
     this.socket.on('chat-message', msg=>{
       this.setState({
         chats: [...this.state.chats, msg]
@@ -82,6 +82,7 @@ class Chatroom extends Component{
     const chats = this.state.chats.filter((chat, index)=>{
       return chat.receiver_id==friends_id || chat.sender_id == friends_id
     })
+    // const chats = this.state.chats
 
 
     return(

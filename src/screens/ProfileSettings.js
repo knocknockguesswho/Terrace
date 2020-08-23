@@ -43,7 +43,7 @@ class ProfileSettings extends Component{
           <View style={styles.avatarContainer}>
             <View style={styles.avatar}>
               <Image 
-                source={{uri: `http:192.168.1.9:3000/uploads/${data.avatar}`}}
+                source={{uri: `http:192.168.100.11:3000/uploads/${data.avatar}`}}
                 style={{flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 100}}
               />
             </View>

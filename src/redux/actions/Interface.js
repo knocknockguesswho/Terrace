@@ -6,7 +6,7 @@ export const ShowFriends = (id) =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.1.9:3000/user/showfriends/${id}`
+        url: `http://192.168.100.11:3000/user/showfriends/${id}`
       }
     )
   }
@@ -19,7 +19,7 @@ export const ShowAllUsers = () =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.1.9:3000/user/showAllUsers`
+        url: `http://192.168.100.11:3000/user/showAllUsers`
       }
     )
   }
@@ -31,7 +31,7 @@ export const ShowAllMessages = (id) =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.1.9:3000/message/showAll/${id}` 
+        url: `http://192.168.100.11:3000/message/showAll/${id}` 
       }
     )
   }
@@ -44,7 +44,7 @@ export const ShowLastMessages = (id) =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.1.9:3000/message/showLast/${id}`
+        url: `http://192.168.100.11:3000/message/showLast/${id}`
       }
     )
   }
@@ -56,7 +56,7 @@ export const SendMessage = (data, token) =>{
     payload: axios(
       {
         method: 'POST',
-        url: `http://192.168.1.9:3000/message/send`,
+        url: `http://192.168.100.11:3000/message/send`,
         data: {
           sender_id: data.sender_id,
           receiver_id: data.receiver_id,

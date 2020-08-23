@@ -59,7 +59,7 @@ class Profile extends Component{
               <View style={styles.avatarContainer}>
                 <Image 
                   style={{flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 100}}
-                  source={{uri: `http://192.168.1.9:3000/uploads/${data.avatar}`}}
+                  source={{uri: `http://192.168.100.11:3000/uploads/${data.avatar}`}}
                 />
               </View>
               <TouchableOpacity onPress={this.handleGoToProfileSettings} activeOpacity={.8} style={styles.settingButton}>

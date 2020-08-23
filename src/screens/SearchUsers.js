@@ -60,7 +60,7 @@ class SearchUsers extends Component{
                 <View key={index} style={styles.userContainer}>
                   <TouchableOpacity style={styles.friendAvatar}>
                     <Image 
-                      source={{uri: `http://192.168.1.9:3000/uploads/${user.avatar}`}}
+                      source={{uri: `http://192.168.100.11:3000/uploads/${user.avatar}`}}
                       style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
                     />
                   </TouchableOpacity>

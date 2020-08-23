@@ -6,7 +6,7 @@ export const Login = (data) =>{
     payload: axios(
       {
         method: 'POST',
-        url: `http://192.168.1.9:3000/auth/login`,
+        url: `http://192.168.100.11:3000/auth/login`,
         data:{
           username: data.username,
           password: data.password
@@ -29,7 +29,7 @@ export const Register = (formData) =>{
     payload: axios(
       {
       method: 'POST',
-      url: 'http://192.168.1.9:3000/auth/register',
+      url: 'http://192.168.100.11:3000/auth/register',
       data: formData,
       headers: {
         'Accept': 'application/json',

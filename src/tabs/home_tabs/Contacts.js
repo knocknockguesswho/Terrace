@@ -87,7 +87,7 @@ class Contacts extends Component{
                         longitude: this.state.longitude
                       })} style={styles.friendAvatar}>
                       <Image 
-                        source={{uri: `http:192.168.1.9:3000/uploads/${friend.avatar}`}}
+                        source={{uri: `http:192.168.100.11:3000/uploads/${friend.avatar}`}}
                         style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
                       />
                     </TouchableOpacity>
