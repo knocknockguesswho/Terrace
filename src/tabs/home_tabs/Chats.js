@@ -65,7 +65,7 @@ class Chats extends Component{
     this.handleShowMessage();
     this.handleShowFriends();
   }
-
+  
   componentWillUnmount(){
     this.socket.removeAllListeners();
     this.socket.disconnect()
@@ -107,7 +107,11 @@ class Chats extends Component{
                     const timeUnix = Date.parse(message.created_at);
                     const time = new Date(timeUnix).toLocaleTimeString('id-ID');
                     return(
-                      <TouchableOpacity key={index} activeOpacity={.5} onPress={()=>this.props.navigation.push('Chatroom', { friendsID: message.id_ur!==user_id? message.id_ur : message.id_us, avatar: message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar, friendsName: message.id_ur!==user_id? message.receiver_fullname : message.sender_fullname })} style={styles.chatContainer}>
+                      <TouchableOpacity key={index} activeOpacity={.5} onPress={()=>this.props.navigation.push('Chatroom', { 
+                        friendsID: message.id_ur!==user_id? message.id_ur : message.id_us, 
+                        avatar: message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar, 
+                        friendsName: message.id_ur!==user_id? message.receiver_fullname : message.sender_fullname
+                      })} style={styles.chatContainer}>
                         <View style={styles.friendsAvatar}>
                           <Image
                             source={{uri: `http://192.168.100.11:3000/uploads/${message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar}`}}

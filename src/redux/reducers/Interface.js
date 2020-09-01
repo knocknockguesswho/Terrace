@@ -105,6 +105,24 @@ const Interface = (state = initialState, action)=>{
         isLoading: false,
         isError: false,
       }
+    case 'SETLOCATION_PENDING':
+      return{
+        ...state,
+        isLoading: true,
+        isError: false
+      }
+    case 'SETLOCATION_REJECTED':
+      return{
+        ...state,
+        isLoading: false,
+        isError: true
+      }
+    case 'SETLOCATION_FULFILLED':
+      return{
+        ...state,
+        isLoading: false,
+        isError: false,
+      }
     default:
       return state;
   }

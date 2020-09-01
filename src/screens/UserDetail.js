@@ -19,20 +19,19 @@ import Geolocation from '@react-native-community/geolocation';
 
 
 class UserDetail extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       search: '',
       sendComp: 'UserDetail',
-      latitude: -6.1753924,
-      longitude: 106.8249641,
+      latitude: this.props.route.params.latitude,
+      longitude: this.props.route.params.longitude,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
       error: null,
     }
     this.map = null;
   }
-  // watchID: ?number = null
 
   
   handleComp = () =>{
@@ -82,7 +81,6 @@ class UserDetail extends Component{
   async componentDidMount(){
     await this.requestLocationPermission();
     await this.geoLocation();
-    console.log(this.props)
   }
 
   componentDidUpdate(nextState){
@@ -158,7 +156,7 @@ class UserDetail extends Component{
               </View>
           </View>
           <View style={styles.liveLoc}>
-            <Text style={styles.locTitle}>{data.fullName}'s Location</Text>
+            <Text style={styles.locTitle}>{data.fullname}'s Location</Text>
             <MapMarkerLogo 
               width={35}
               height={35}

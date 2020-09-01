@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {SetLocation} from '../../redux/actions/Interface'
 import HeaderTab from '../../components/header/Header';
 import SearchLogo from '../../../assets/images/search-placeholder.svg';
 import ChatLogo from '../../../assets/images/comment-dots-blue.svg';
 import MapMarker from '../../../assets/images/map-marker-alt.svg';
-import DumyAvatarDepp from '../../../assets/images/johnny-depp.jpg';
-import DumyAvatarOzzy from '../../../assets/images/ozzy.jpg';
+
 
 import {
   TouchableOpacity,
@@ -22,12 +22,12 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 
 class Contacts extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       sendComp: 'Contacts',
-      latitude: 0,
-      longitude: 0
+      latitude: this.props.Interface.friends.latitude,
+      longitude: this.props.Interface.friends.longitude
     }
   }
 
@@ -46,10 +46,22 @@ class Contacts extends Component{
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       }
-      this.setState({
-        latitude: loc.latitude,
-        longitude: loc.longitude
-      })
+      if(this.state.latitude!=loc.latitude&&this.state.longitude!=loc.longitude){
+        const data = {
+          latitude: loc.latitude,
+          longitude: loc.longitude,
+          id: this.props.Interface.friends.id
+        }
+        this.props.SetLocation(data).then(()=>{
+          this.setState({
+            latitude: data.latitude,
+            longitude: data.longitude
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
+        })
+      }
     },
       error=> Alert.alert('Error', JSON.stringify(error))
     )
@@ -83,8 +95,8 @@ class Contacts extends Component{
                         fullname: friend.fullname,
                         email: friend.email,
                         username: friend.username,
-                        latitude: this.state.latitude,
-                        longitude: this.state.longitude
+                        latitude: friend.latitude,
+                        longitude: friend.longitude
                       })} style={styles.friendAvatar}>
                       <Image 
                         source={{uri: `http:192.168.100.11:3000/uploads/${friend.avatar}`}}
@@ -187,5 +199,10 @@ const mapStateToProps = state =>({
   Interface: state.Interface
 })
 
+const mapDispatchToProps = {SetLocation}
 
-export default connect(mapStateToProps)(Contacts);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Contacts);

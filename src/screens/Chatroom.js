@@ -51,10 +51,24 @@ class Chatroom extends Component{
       this.setState({
         chats: this.props.Interface.conversations
       })
-      console.log(res)
     })
     .catch((err)=>{
       console.log(err)
+    })
+  }
+
+  handleFriendPress = () =>{
+    const id = this.props.route.params.friendsID
+    const data = this.props.Interface.friends.filter((friend, index)=>{
+      return friend.id==id
+    })
+    this.props.navigation.push('UserDetail', {
+      avatar: data[0].avatar, 
+      fullname: data[0].fullname,
+      email: data[0].email,
+      username: data[0].username,
+      latitude: data[0].latitude,
+      longitude: data[0].longitude
     })
   }
 
@@ -66,9 +80,10 @@ class Chatroom extends Component{
       this.setState({
         chats: [...this.state.chats, msg]
       })
-      console.log(msg, 'msg')
+      // console.log(msg, 'msg')
     })
-    this.handleFetchData()
+    this.handleFetchData();
+    // this.handleFriendPress();
   }
 
   componentWillUnmount(){
@@ -78,6 +93,7 @@ class Chatroom extends Component{
 
   render(){
     let friends_id = this.props.route.params.friendsID
+    console.log(this.props.route.params)
     // let user_id = this.props.Auth.data.id
     const chats = this.state.chats.filter((chat, index)=>{
       return chat.receiver_id==friends_id || chat.sender_id == friends_id
@@ -91,6 +107,7 @@ class Chatroom extends Component{
           comp={this.state.sendComp} 
           navigation={this.props.navigation} 
           data={this.props.route.params}
+          friendDetails={this.handleFriendPress}
         />
         <View style={{backgroundColor: 'white', flex: 1, paddingTop: 15}}>
           <View on style={{flex: 1}}>

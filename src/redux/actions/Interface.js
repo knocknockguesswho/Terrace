@@ -69,3 +69,22 @@ export const SendMessage = (data, token) =>{
     )
   }
 }
+
+export const SetLocation = (data) =>{
+  return{
+    type: 'SETLOCATION',
+    payload: axios(
+      {
+        method: 'PUT',
+        url: `http://192.168.100.11:3000/user/setLocation/${data.id}`,
+        data: {
+          latitude: data.latitude,
+          longitude: data.longitude,
+        },
+        // headers:{
+        //   'Authorization': token
+        // }
+      }
+    )
+  }
+}

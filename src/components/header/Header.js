@@ -173,7 +173,7 @@ const Header = (props) =>{
             </TouchableOpacity>
           </View>
           <View style={{height: '100%', justifyContent: 'center'}}>
-            <TouchableOpacity onPress={handleGoToProfile} activeOpacity={.5} style={styles.chatComponent}>
+            <TouchableOpacity onPress={props.friendDetails} activeOpacity={.5} style={styles.chatComponent}>
               <View style={styles.avatar}>
                 <Image 
                   style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
