@@ -53,6 +53,7 @@ User can see all of their friends info, such as Email, Fullname, Avatar and Loca
 
 ![](https://i.imgur.com/ebPfMr5.png)
 
+### You can check how this app UI was designed by AdobeXD on my [Behance Works Gallery](https://www.behance.net/gallery/103777647/Terrace-Mobile-App-UI-Design)
 
 ## Usage
 
