@@ -3,6 +3,7 @@ import {Login} from '../redux/actions/Auth';
 import {connect} from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 import TerraceLogo from '../../assets/images/terrace-logo.svg';
+import Splash from '../components/Splash';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -12,7 +13,6 @@ import {
   Dimensions,
   TextInput
 } from 'react-native';
-import io from 'socket.io-client';
 
 class Signin extends Component{
   constructor(){
@@ -46,9 +46,18 @@ class Signin extends Component{
     })
   }
 
+  componentDidMount(){
+    if(this.props.Auth.isLogin){
+      this.props.navigation.push('Home')
+    }
+  }
+
   render(){
     return(
       <>
+        {this.props.Auth.isLoading?
+          <Splash /> :
+
         <View style={{backgroundColor: '#188FDE', flex: 1}}>
           <View style={styles.terraceLogo}>
             <TerraceLogo width={175} height={175} />
@@ -134,6 +143,7 @@ class Signin extends Component{
 
           </View>
         </View>
+        }
       </>
     )
   }

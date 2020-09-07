@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {API_URL} from '@env';
 import {ShowLastMessages, ShowFriends} from '../../redux/actions/Interface';
 import HeaderTab from '../../components/header/Header';
 import ChatLogo from '../../../assets/images/comment-dots-circle.svg';
@@ -53,7 +54,7 @@ class Chats extends Component{
   }
 
   async componentDidMount(){
-    this.socket = io('http://192.168.100.11:3000');
+    this.socket = io(`${API_URL}`);
     await this.socket.on('last-message', msg=>{
       const test = this.state.latest_conversations;
       const objInd=test.findIndex(data=>data.id===msg.id)
@@ -76,7 +77,6 @@ class Chats extends Component{
   render(){
 
     const user_id = this.props.Auth.data.id;
-    const friends = this.props.Interface.friends;
     
     
     let conversations = this.state.latest_conversations
@@ -93,8 +93,7 @@ class Chats extends Component{
     return(
       <>
         <HeaderTab comp={this.state.sendComp} navigation={this.props.navigation} />
-        {this.props.Auth.data.isLogin? 
-          this.props.navigation.push('Signin') :
+        
           <View style={{backgroundColor: 'white', flex: 1, paddingTop: 20}}>
             <View style={styles.searchBarContainer}>
               <SearchLogo width={15} height={15} />
@@ -114,7 +113,7 @@ class Chats extends Component{
                       })} style={styles.chatContainer}>
                         <View style={styles.friendsAvatar}>
                           <Image
-                            source={{uri: `http://192.168.100.11:3000/uploads/${message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar}`}}
+                            source={{uri: `${API_URL}/uploads/${message.id_ur!==user_id? message.receiver_avatar : message.sender_avatar}`}}
                             style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
                           />
                         </View>
@@ -136,7 +135,7 @@ class Chats extends Component{
               </ScrollView>
             </View>
           </View>
-        }
+
       </>
     )
   }

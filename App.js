@@ -69,7 +69,7 @@ const App = () => {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home' headerMode="none">
+            <Stack.Navigator initialRouteName='Signin' headerMode="none">
               <Stack.Screen name='Home' component={TabRoute} />
               <Stack.Screen name='Signin' component={Signin} />
               <Stack.Screen name='Signup' component={Signup} />

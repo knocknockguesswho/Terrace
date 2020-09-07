@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {API_URL} from '@env';
 import {SendMessage, ShowAllMessages, ShowLastMessages} from '../redux/actions/Interface'
 import HeaderTab from '../components/header/Header';
 import MapView, {Marker} from 'react-native-maps';
@@ -75,7 +76,7 @@ class Chatroom extends Component{
   
   
   componentDidMount(){
-    this.socket = io('http://192.168.100.11:3000');
+    this.socket = io(`${API_URL}`);
     this.socket.on('chat-message', msg=>{
       this.setState({
         chats: [...this.state.chats, msg]

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import {Logout} from '../../redux/actions/Auth';
+import {API_URL} from "@env"
 import {ShowAllUsers} from '../../redux/actions/Interface';
 import TerraceLogo from '../../../assets/images/terrace-logo.svg';
 import DummyAvatar from '../../../assets/images/raven_profile.jpg';
@@ -87,7 +88,7 @@ const Header = (props) =>{
           <View style={styles.avatar}>
             <Image 
               style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
-              source={{uri: `http://192.168.100.11:3000/uploads/${props.Auth.data.avatar}`}}
+              source={{uri: `${API_URL}/uploads/${props.Auth.data.avatar}`}}
              />
           </View>
           <View style={styles.profileDetail}>
@@ -177,7 +178,7 @@ const Header = (props) =>{
               <View style={styles.avatar}>
                 <Image 
                   style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
-                  source={{uri: `http://192.168.100.11:3000/uploads/${props.data.avatar}`}}
+                  source={{uri: `${API_URL}/uploads/${props.data.avatar}`}}
                 />
               </View>
               <View style={styles.profileDetail}>

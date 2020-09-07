@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {API_URL} from '@env';
 import HeaderTab from '../components/header/Header';
 import SearchLogo from '../../assets/images/search-placeholder.svg';
 import AddUserLogo from '../../assets/images/user-plus-blue.svg';
@@ -60,7 +61,7 @@ class SearchUsers extends Component{
                 <View key={index} style={styles.userContainer}>
                   <TouchableOpacity style={styles.friendAvatar}>
                     <Image 
-                      source={{uri: `http://192.168.100.11:3000/uploads/${user.avatar}`}}
+                      source={{uri: `${API_URL}/uploads/${user.avatar}`}}
                       style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
                     />
                   </TouchableOpacity>

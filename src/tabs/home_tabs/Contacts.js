@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {API_URL} from '@env';
 import {SetLocation} from '../../redux/actions/Interface'
 import HeaderTab from '../../components/header/Header';
 import SearchLogo from '../../../assets/images/search-placeholder.svg';
@@ -99,7 +100,7 @@ class Contacts extends Component{
                         longitude: friend.longitude
                       })} style={styles.friendAvatar}>
                       <Image 
-                        source={{uri: `http:192.168.100.11:3000/uploads/${friend.avatar}`}}
+                        source={{uri: `${API_URL}/uploads/${friend.avatar}`}}
                         style={{flex: 1, width: null, height: null, resizeMode:'cover', borderRadius: 100}}
                       />
                     </TouchableOpacity>

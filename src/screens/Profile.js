@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {API_URL} from '@env';
 import HeaderTab from '../components/header/Header';
 import SettingButton from '../../assets/images/cog-circle.svg';
 import MapMarkerLogo from '../../assets/images/map-marker-alt.svg';
@@ -59,7 +60,7 @@ class Profile extends Component{
               <View style={styles.avatarContainer}>
                 <Image 
                   style={{flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 100}}
-                  source={{uri: `http://192.168.100.11:3000/uploads/${data.avatar}`}}
+                  source={{uri: `${API_URL}/uploads/${data.avatar}`}}
                 />
               </View>
               <TouchableOpacity onPress={this.handleGoToProfileSettings} activeOpacity={.8} style={styles.settingButton}>

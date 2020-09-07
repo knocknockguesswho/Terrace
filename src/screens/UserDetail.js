@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {API_URL} from '@env';
 import HeaderTab from '../components/header/Header';
 import MapMarkerLogo from '../../assets/images/map-marker-alt.svg';
 import MapView, {Marker, AnimatedRegion} from 'react-native-maps';
@@ -129,7 +130,7 @@ class UserDetail extends Component{
                 title={'Your Location'}
               >
                 <Image 
-                  source={{uri: `http://192.168.100.11:3000/uploads/${this.props.route.params.avatar}`}}
+                  source={{uri: `${API_URL}/uploads/${this.props.route.params.avatar}`}}
                   style={{flex: 1, height: 50, width: 50, resizeMode: 'cover', borderRadius: 100}}
                 />
               </Marker>
@@ -140,7 +141,7 @@ class UserDetail extends Component{
               <View style={styles.avatarContainer}>
                 <Image 
                   style={{flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 100}}
-                  source={{uri: `http://192.168.100.11:3000/uploads/${data.avatar}`}}
+                  source={{uri: `${API_URL}/uploads/${data.avatar}`}}
                 />
               </View>
               <Text style={styles.fullName}>{data.fullname}</Text>

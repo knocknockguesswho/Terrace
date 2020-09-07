@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {API_URL} from '@env';
 
 export const ShowFriends = (id) =>{
   return{
@@ -6,7 +7,7 @@ export const ShowFriends = (id) =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.100.11:3000/user/showfriends/${id}`
+        url: `${API_URL}/user/showfriends/${id}`
       }
     )
   }
@@ -19,7 +20,7 @@ export const ShowAllUsers = () =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.100.11:3000/user/showAllUsers`
+        url: `${API_URL}/user/showAllUsers`
       }
     )
   }
@@ -31,7 +32,7 @@ export const ShowAllMessages = (id) =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.100.11:3000/message/showAll/${id}` 
+        url: `${API_URL}/message/showAll/${id}` 
       }
     )
   }
@@ -44,7 +45,7 @@ export const ShowLastMessages = (id) =>{
     payload: axios(
       {
         method: 'GET',
-        url: `http://192.168.100.11:3000/message/showLast/${id}`
+        url: `${API_URL}/message/showLast/${id}`
       }
     )
   }
@@ -56,7 +57,7 @@ export const SendMessage = (data, token) =>{
     payload: axios(
       {
         method: 'POST',
-        url: `http://192.168.100.11:3000/message/send`,
+        url: `${API_URL}/message/send`,
         data: {
           sender_id: data.sender_id,
           receiver_id: data.receiver_id,
@@ -76,7 +77,7 @@ export const SetLocation = (data) =>{
     payload: axios(
       {
         method: 'PUT',
-        url: `http://192.168.100.11:3000/user/setLocation/${data.id}`,
+        url: `${API_URL}/user/setLocation/${data.id}`,
         data: {
           latitude: data.latitude,
           longitude: data.longitude,

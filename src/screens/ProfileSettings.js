@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {API_URL} from '@env';
 import HeaderTab from '../components/header/Header';
 import MapView, {Marker} from 'react-native-maps';
 import {
@@ -30,9 +31,6 @@ class ProfileSettings extends Component{
       }
     }
   }
-  componentDidMount(){
-    console.log(this.props.Auth)
-  }
 
   render(){
     const data = this.props.Auth.data
@@ -43,7 +41,7 @@ class ProfileSettings extends Component{
           <View style={styles.avatarContainer}>
             <View style={styles.avatar}>
               <Image 
-                source={{uri: `http:192.168.100.11:3000/uploads/${data.avatar}`}}
+                source={{uri: `${API_URL}/uploads/${data.avatar}`}}
                 style={{flex: 1, width: null, height: null, resizeMode: 'cover', borderRadius: 100}}
               />
             </View>

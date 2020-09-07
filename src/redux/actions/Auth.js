@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {API_URL} from '@env';
 
 export const Login = (data) =>{
   return{
@@ -6,8 +7,8 @@ export const Login = (data) =>{
     payload: axios(
       {
         method: 'POST',
-        url: `http://192.168.100.11:3000/auth/login`,
-        data:{
+        url: `${API_URL}/auth/login`,
+       data:{
           username: data.username,
           password: data.password
         }
@@ -29,7 +30,7 @@ export const Register = (formData) =>{
     payload: axios(
       {
       method: 'POST',
-      url: 'http://192.168.100.11:3000/auth/register',
+      url: `${API_URL}/auth/register`,
       data: formData,
       headers: {
         'Accept': 'application/json',
