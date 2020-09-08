@@ -6,7 +6,9 @@ const initialState = {
   conversations: [],
   latest_conversations: [],
   friends: [],
-  users: []
+  users: [],
+  latitude: 0,
+  longitude: 0
 }
 
 const Interface = (state = initialState, action)=>{
@@ -122,6 +124,8 @@ const Interface = (state = initialState, action)=>{
         ...state,
         isLoading: false,
         isError: false,
+        latitude: action.payload.data.data.latitude,
+        longitude: action.payload.data.data.longitude,
       }
     default:
       return state;

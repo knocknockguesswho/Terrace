@@ -27,8 +27,6 @@ class Contacts extends Component{
     super(props);
     this.state = {
       sendComp: 'Contacts',
-      latitude: this.props.Interface.friends.latitude,
-      longitude: this.props.Interface.friends.longitude
     }
   }
 
@@ -40,36 +38,36 @@ class Contacts extends Component{
     this.setState({sendComp: !this.state.sendComp})
   }
 
-  geoLocation = async (avatar, fullname, email, username) =>{
-    await Geolocation.getCurrentPosition( 
-      async position =>{
-      const loc = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      }
-      if(this.state.latitude!=loc.latitude&&this.state.longitude!=loc.longitude){
-        const data = {
-          latitude: loc.latitude,
-          longitude: loc.longitude,
-          id: this.props.Interface.friends.id
-        }
-        this.props.SetLocation(data).then(()=>{
-          this.setState({
-            latitude: data.latitude,
-            longitude: data.longitude
-          })
-          .catch((err)=>{
-            console.log(err)
-          })
-        })
-      }
-    },
-      error=> Alert.alert('Error', JSON.stringify(error))
-    )
-  }
+  // geoLocation = async (avatar, fullname, email, username) =>{
+  //   await Geolocation.getCurrentPosition( 
+  //     async position =>{
+  //     const loc = {
+  //       latitude: position.coords.latitude,
+  //       longitude: position.coords.longitude
+  //     }
+  //     if(this.state.latitude!=loc.latitude&&this.state.longitude!=loc.longitude){
+  //       const data = {
+  //         latitude: loc.latitude,
+  //         longitude: loc.longitude,
+  //         id: this.props.Interface.friends.id
+  //       }
+  //       this.props.SetLocation(data).then(()=>{
+  //         this.setState({
+  //           latitude: data.latitude,
+  //           longitude: data.longitude
+  //         })
+  //         .catch((err)=>{
+  //           console.log(err)
+  //         })
+  //       })
+  //     }
+  //   },
+  //     error=> Alert.alert('Error', JSON.stringify(error))
+  //   )
+  // }
 
   componentDidMount(){
-    this.geoLocation();
+    // this.geoLocation();
   }
   
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Login} from '../redux/actions/Auth';
+import {SetLocation} from '../redux/actions/Interface';
 import {connect} from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 import TerraceLogo from '../../assets/images/terrace-logo.svg';
@@ -11,8 +12,10 @@ import {
   View,
   Text,
   Dimensions,
-  TextInput
+  TextInput,
+  PermissionsAndroid
 } from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 
 class Signin extends Component{
   constructor(){
@@ -22,9 +25,62 @@ class Signin extends Component{
       username: '',
       password: '',
       actionMsg: '',
+      longitude: 0,
+      latitue: 0,
       isError: false
     }
   }
+
+  requestLocationPermission = async () =>{
+    try{
+      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'ACCESSING LOCATION',
+        message: "Your location will be updated.",
+        buttonNeutral: 'Ask me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK'
+      })
+      if(granted===PermissionsAndroid.RESULTS.GRANTED){
+        console.log('Your position has been updated')
+      } else{
+        console.log('Access Location Permission Denied')
+      }
+    } catch(err){
+      throw Error;
+      console.log(err)
+    }
+  }
+
+  watchID = null;
+
+  // geoLocation = async (user_id) =>{
+  //   await Geolocation.getCurrentPosition( 
+  //     async position =>{
+  //     const loc = {
+  //       latitude: position.coords.latitude,
+  //       longitude: position.coords.longitude
+  //     }
+  //     if(this.state.latitude!=loc.latitude&&this.state.longitude!=loc.longitude){
+  //       const data = {
+  //         latitude: loc.latitude,
+  //         longitude: loc.longitude,
+  //         id: user_id
+  //       }
+  //       this.props.SetLocation(data).then(()=>{
+  //         this.setState({
+  //           latitude: data.latitude,
+  //           longitude: data.longitude
+  //         })
+  //         .catch((err)=>{
+  //           console.log(err)
+  //         })
+  //       })
+  //     }
+  //   },
+  //     error=> Alert.alert('Error', JSON.stringify(error))
+  //   )
+  // }
 
   handleLogin = (event) =>{
     event.preventDefault();
@@ -32,8 +88,9 @@ class Signin extends Component{
       username: this.state.username,
       password: this.state.password
     };
-    this.props.Login(data).then((res)=>{
-      this.props.navigation.push('Home')
+    this.props.Login(data).then(async(res)=>{
+      await this.requestLocationPermission()
+      this.props.navigation.push('Home');
     })
     .catch((err)=>{
       console.log(err)
@@ -48,7 +105,7 @@ class Signin extends Component{
 
   componentDidMount(){
     if(this.props.Auth.isLogin){
-      this.props.navigation.push('Home')
+      this.props.navigation.push('Home');
     }
   }
 
@@ -258,7 +315,7 @@ const mapStateToProps = state =>({
   Interface: state.Interface
 });
 
-const mapDispatchToProps = {Login};
+const mapDispatchToProps = {Login, SetLocation};
 
 
 export default connect(

@@ -6,17 +6,11 @@ import MapView, {Marker, AnimatedRegion} from 'react-native-maps';
 import {
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   Dimensions,
-  Platform,
   Image,
-  Alert,
-  PermissionsAndroid
 } from 'react-native';
-
-import Geolocation from '@react-native-community/geolocation';
 
 
 class UserDetail extends Component{
@@ -39,71 +33,10 @@ class UserDetail extends Component{
     this.setState({sendComp: !this.state.sendComp})
   }
 
-
-  requestLocationPermission = async () =>{
-    try{
-      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: 'ACCESSING LOCATION',
-        message: "Your location will be updated.",
-        buttonNeutral: 'Ask me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK'
-      })
-      if(granted===PermissionsAndroid.RESULTS.GRANTED){
-        console.log('Your position has been updated')
-      } else{
-        console.log('Access Location Permission Denied')
-      }
-    } catch(err){
-      console.log(err)
-    }
-  }
-
-  watchID = null;
-
-
-  geoLocation = async () =>{
-    await Geolocation.getCurrentPosition( async position =>{
-        const loc = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        }
-        this.setState({latitude: loc.latitude, longitude: loc.longitude});
-      },
-      error=> Alert.alert('Error', JSON.stringify(error))
-    );
-  }
+  
 
 
 
-
-
-  async componentDidMount(){
-    await this.requestLocationPermission();
-    await this.geoLocation();
-  }
-
-  componentDidUpdate(nextState){
-    const duration = 500
-
-    if(this.state !== nextState){
-      if(Platform.OS === 'android'){
-        if(this.map){
-          this.map.animateCamera({center: {latitude: this.state.latitude, longitude: this.state.longitude}, pitch: 2, heading: 20, altitude: 200, zoom: 16}, duration)
-        } else{
-          this.state.timing({
-            ...nextState,
-            duration
-          }).start()
-        }
-      }
-    }
-  }
-
-  componentWillUnmount(){
-    this.watchID != null && Geolocation.clearWatch(this.watchID)
-  }
 
 
   render(){

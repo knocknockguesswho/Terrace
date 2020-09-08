@@ -1,33 +1,91 @@
 import React, { Component } from 'react';
 import {API_URL} from '@env';
+import {connect} from 'react-redux'
+import {SetLocation} from '../redux/actions/Interface'
 import HeaderTab from '../components/header/Header';
 import SettingButton from '../../assets/images/cog-circle.svg';
 import MapMarkerLogo from '../../assets/images/map-marker-alt.svg';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker,AnimatedRegion} from 'react-native-maps';
 import {
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   Dimensions,
   Platform,
   Image
 } from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 
 class Profile extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       sendComp: 'Profile',
-      latitude: -6.1753924,
-      longitude: 106.8249641,
+      latitude: this.props.Auth.data.latitude,
+      longitude: this.props.Auth.data.longitude,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
       error: null
     }
+    this.map = null;
+  }
+
+  geoLocation = async (user_id) =>{
+    await Geolocation.getCurrentPosition( 
+      async position =>{
+      const loc = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
+      if(this.state.latitude!=loc.latitude&&this.state.longitude!=loc.longitude){
+        const data = {
+          latitude: loc.latitude,
+          longitude: loc.longitude,
+          id: user_id
+        }
+        this.props.SetLocation(data).then(()=>{
+          this.setState({
+            latitude: data.latitude,
+            longitude: data.longitude
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
+        })
+      }
+    },
+      error=> Alert.alert('Error', JSON.stringify(error))
+    )
   }
 
   handleGoToProfileSettings = () =>{
     this.props.navigation.push('ProfileSettings')
+  }
+
+  componentDidMount(){
+    this.geoLocation(this.props.route.params.id)
+  }
+
+  async componentDidUpdate(nextState){
+    const duration = 500
+
+    if(this.state !== nextState){
+      if(Platform.OS === 'android'){
+        if(this.map){
+          await this.map.animateCamera({center: {latitude: this.state.latitude, longitude: this.state.longitude}, pitch: 2, heading: 20, altitude: 200, zoom: 25}, duration)
+        } else{
+          this.state.timing({
+            ...nextState,
+            duration
+          }).start()
+        }
+      }
+    }
+  }
+
+  componentWillUnmount(){
+    this.watchID != null && Geolocation.clearWatch(this.watchID)
   }
 
   render(){
@@ -38,21 +96,27 @@ class Profile extends Component{
         <HeaderTab comp={this.state.sendComp} navigation={this.props.navigation} />
         <View style={{backgroundColor: 'white', flex: 1}}>
           <TouchableOpacity onPress={()=>this.props.navigation.push('MapDetail')} activeOpacity={.5} style={styles.mapContainer}>
-            <MapView
-              style={{flex: 1, width: null, height: null}}
+          <MapView
+              ref={(map)=> {this.map = map;}}
+              style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}
               initialRegion={{
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: this.state.latitudeDelta,
+                longitudeDelta: this.state.longitudeDelta,
               }}
             >
               <Marker
-                draggable={true}
+                draggable
                 coordinate={this.state}
-                title={'Monumen Nasional'}
-                description={'Well-known obelisk built to commemorate Indonesian independence from the Netherlands.'}
-              />
+                title={'Your Location'}
+              >
+                <Image 
+                  source={{uri: `${API_URL}/uploads/${this.props.route.params.avatar}`}}
+                  style={{flex: 1, height: 50, width: 50, resizeMode: 'cover', borderRadius: 100}}
+                />
+              </Marker>
+
             </MapView>
           </TouchableOpacity>
           <View style={styles.userDetail}>
@@ -178,4 +242,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Profile;
+const mapStateToProps = state =>({
+  Auth: state.Auth,
+  Interface: state.Interface
+});
+
+const mapDispatchToProps = {SetLocation}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

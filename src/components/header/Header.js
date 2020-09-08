@@ -28,10 +28,13 @@ const Header = (props) =>{
 
   const handleGoToProfile = () =>{
     props.navigation.push('Profile', {
+      id: props.Auth.data.id,
       avatar: props.Auth.data.avatar, 
       fullname: props.Auth.data.fullname,
       email: props.Auth.data.email,
-      username: props.Auth.data.username
+      username: props.Auth.data.username,
+      latitude: props.Auth.data.latitude,
+      longitude: props.Auth.data.longitude
     });
   }
 
