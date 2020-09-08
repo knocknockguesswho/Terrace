@@ -42,11 +42,12 @@ class UserDetail extends Component{
   render(){
 
     const data = this.props.route.params
+    let mapData = this.state
     return(
       <>
         <HeaderTab comp={this.state.sendComp} navigation={this.props.navigation} />
         <View style={{backgroundColor: 'white', flex: 1}}>
-          <TouchableOpacity activeOpacity={.5} style={styles.mapContainer}>
+          <TouchableOpacity onPress={()=>this.props.navigation.push('MapDetail', {avatar: data.avatar, data: mapData})} activeOpacity={.5} style={styles.mapContainer}>
             <MapView
               ref={(map)=> {this.map = map;}}
               style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}

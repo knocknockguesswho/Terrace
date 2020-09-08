@@ -5,7 +5,7 @@ import {SetLocation} from '../redux/actions/Interface'
 import HeaderTab from '../components/header/Header';
 import SettingButton from '../../assets/images/cog-circle.svg';
 import MapMarkerLogo from '../../assets/images/map-marker-alt.svg';
-import MapView, {Marker,AnimatedRegion} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -13,7 +13,8 @@ import {
   Text,
   Dimensions,
   Platform,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 
@@ -73,7 +74,7 @@ class Profile extends Component{
     if(this.state !== nextState){
       if(Platform.OS === 'android'){
         if(this.map){
-          await this.map.animateCamera({center: {latitude: this.state.latitude, longitude: this.state.longitude}, pitch: 2, heading: 20, altitude: 200, zoom: 25}, duration)
+          await this.map.animateCamera({center: {latitude: this.state.latitude, longitude: this.state.longitude}, pitch: 2, heading: 20, altitude: 200, zoom: 16}, duration)
         } else{
           this.state.timing({
             ...nextState,
@@ -90,12 +91,18 @@ class Profile extends Component{
 
   render(){
     const data = this.props.route.params
+    let mapData = {
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      latitudeDelta: this.state.latitudeDelta,
+      longitudeDelta: this.state.longitudeDelta,
+    }
 
     return(
       <>
         <HeaderTab comp={this.state.sendComp} navigation={this.props.navigation} />
         <View style={{backgroundColor: 'white', flex: 1}}>
-          <TouchableOpacity onPress={()=>this.props.navigation.push('MapDetail')} activeOpacity={.5} style={styles.mapContainer}>
+          <TouchableOpacity onPress={()=>this.props.navigation.push('MapDetail', {avatar:this.props.route.params.avatar, data: mapData})} activeOpacity={.5} style={styles.mapContainer}>
           <MapView
               ref={(map)=> {this.map = map;}}
               style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}
